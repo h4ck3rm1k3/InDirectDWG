@@ -1,0 +1,28 @@
+
+template <class T> class OdRxObjectImpl
+{
+
+};
+
+class OdStreamBuf
+{
+};
+class OdString
+{};
+
+class OdCodePageId{};
+class OdDbBlockTableRecordPtr{};
+class  OdDbDatabasePtr{};
+class OdDbObjectId{};
+class OdDbViewportPtr{};
+class OdGsDevicePtr{};
+class OdInt32{};
+class OdInt64{};
+class OdRdFileBufPtr{};
+class OdResult{};
+class OdStreamBufPtr{};
+class OdUInt32{};
+class OdUInt64{};
+class OdUInt8{};
+class OdWrFileBufPtr{};
+

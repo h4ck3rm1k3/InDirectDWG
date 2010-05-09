@@ -30,7 +30,6 @@ class OdCodePageId{};
 
 extern OdCodePageId CP_UNDEFINED; // global
 
-class OdDbObjectId{};
 
 
 class OdGsDevice{};
@@ -92,7 +91,7 @@ class  OdDb
 
 class OdTtfDescriptor {};
 class OdHatchPatternManager{};
-class OdDbObjectPtr {};
+
 class OdPassword {};
 namespace Oda 
 { 
@@ -172,22 +171,33 @@ class OdDbHostAppServices2
 class OdDbSystemServices
 {};
 
-
-
-
+// wrapper for the coordinates
+class CoordVal
+{
+ public:
+  CoordVal & operator = (CoordVal &);
+};
 
 class OdGePoint3d {
  public:
+  CoordVal  x;
+  CoordVal  y;
+  CoordVal  z;
+  OdGePoint3d( );
   OdGePoint3d( int, int, int);
+  
 };
+
 class OdGeVector3d {
  public:
+  OdGeVector3d( );
   OdGeVector3d( int, int, int);
 };
 
 class OdGePoint2d 
 {
  public:
+  OdGePoint2d ();
   OdGePoint2d (double, double );
 
 };
@@ -245,9 +255,11 @@ class OdDbViewportPtr{
 
 class OdDbBlockTableRecord{
  public:
-  void appendOdDbEntity(OdDbViewportPtr&);
-  //  void appendOdDbEntity(OdDbViewportPtr&);
 
+  template <class T>void appendOdDbEntity(T&);
+  
+  //  void appendOdDbEntity(OdDbViewportPtr&);
+  void setName();
   void release();
 
 };
@@ -257,16 +269,31 @@ class OdDbBlockTableRecordPtr{
   OdDbBlockTableRecord * operator -> ();
 
 };
+
+class OdDbLayerTableRecord;
+
+class OdDbLayerTableRecordPtr{
+ public:
+  OdDbLayerTableRecord * operator -> ();
+  OdDbLayerTableRecordPtr operator = (OdDbLayerTableRecordPtr &);
+  OdDbLayerTableRecordPtr operator = (OdDbLayerTableRecord *);
+};
+
+
 //paper and modelspace
 class Space
 {
  public:
-  OdDbBlockTableRecordPtr safeOpenObject(OdDb::ACCESS);
+  //  OdDbBlockTableRecordPtr safeOpenObject(OdDb::ACCESS);
+  OdDbLayerTableRecordPtr safeOpenObject(OdDb::ACCESS);
+  //template <class T> T safeOpenObject(OdDb::ACCESS);
 };
 
 class  OdDbDatabase
 {
  public:
+  
+
   void setEXTMAX(OdGePoint3d);
   void setEXTMIN(OdGePoint3d);
   void setTILEMODE(int);
@@ -275,6 +302,8 @@ class  OdDbDatabase
   void writeFile(OdWrFileBuf*, OdDb::_filetype&, OdDb::autocadversion&, bool);
 
   Space getModelSpaceId();
+  Space getLayerTableId();
+
 };
 
 class  OdDbDatabasePtr
@@ -305,5 +334,148 @@ template <class T> class OdStaticRxObject
 template <class T> void odInitialize(T *);
 void odDbSetTDUCREATE(OdDbDatabase&, OdDbDate&);
 void odDbSetTDUUPDATE(OdDbDatabase&, OdDbDate&);
+
+class OdCmColor{
+ public:
+  void setRGB(int,int,int);
+};
+
+class OdDb2dVertex {
+ public:
+  static OdDb2dVertex * createObject();
+  void setPosition(OdGePoint3d&);
+
+};
+
+class OdDb2dVertexPtr{
+ public:
+  OdDb2dVertex * operator -> ();
+};
+
+
+
+
+//class newRB{};
+/* class oColor{}; */
+/* class p2dPl{}; */
+/* class pLayer{}; */
+/* class pLayers{}; */
+/* class pPoint{}; */
+/* class pV{}; */
+/* class temp{}; */
+/* class xIter{}; */
+
+
+
+class OdResBuf;
+
+class OdResBufPtr
+{
+ public:
+  OdResBufPtr (OdResBuf *);
+  OdResBuf * operator -> ();
+  OdResBuf & operator * ();
+};
+
+class OdResBuf
+{
+ public:
+  static OdResBuf * newRb(int );
+
+  void setString(const char*);
+  void setNext(OdResBufPtr&);
+  OdResBufPtr next();
+
+};
+
+class OdDbPoint;
+class OdDbPointPtr{
+ public:
+  OdDbPointPtr(OdDbPoint *);
+  OdDbPoint * operator -> ();
+};
+
+
+class OdDbLayerTable;
+
+class OdDbLayerTablePtr{
+ public:
+  OdDbLayerTable * operator -> ();
+  OdDbLayerTablePtr & operator = (OdDbBlockTableRecordPtr &);
+  OdDbLayerTablePtr & operator = (OdDbLayerTableRecordPtr);
+  OdDbLayerTablePtr & operator = (OdDbLayerTablePtr &);
+  OdDbLayerTablePtr & operator = (OdDbLayerTable* );
+  OdDbLayerTablePtr & operator = (OdDbLayerTablePtr );
+
+};
+
+class OdDb2dPolyline;
+class OdDb2dPolylinePtr{
+ public:
+  OdDb2dPolylinePtr(OdDb2dPolyline*);
+  OdDb2dPolyline * operator -> ();
+};
+class OdDbObject
+{
+ public:
+  void setXData(OdResBufPtr&);
+
+};
+class OdDbObjectPtr {
+ public:
+  OdDbObject * operator -> ();
+  OdDbObjectPtr operator = (OdDbObject *);
+  OdDbObjectPtr operator = (OdDbPoint *);
+  OdDbObjectPtr operator = (OdDbObjectPtr);
+  
+
+  operator OdDbObject * ();
+  bool operator == (const void *);
+  bool operator != (const void *);
+};
+
+class OdDbObjectId
+{
+ public:
+  //OdDbLayerTableRecordPtr
+  OdDbObjectId & operator = (OdDbBlockTableRecordPtr &);
+  OdDbObjectId & operator = (OdDbLayerTableRecordPtr);
+  OdDbObjectId  & operator = (OdDbLayerTablePtr &);
+  OdDbObjectId  & operator = (OdDbLayerTable* );
+  OdDbObjectId  & operator = (OdDbLayerTablePtr );
+};
+
+class OdDbLayerTable
+{
+ public:
+  OdDbObjectId add(OdDbLayerTableRecordPtr&);
+};
+
+
+class OdDbLayerTableRecord
+{
+ public:
+  static OdDbLayerTableRecord * createObject();
+  void setColor(OdCmColor&);
+  void setName(const char*);
+  OdDbObjectId add(OdDbLayerTableRecordPtr&);
+
+};
+
+class OdDb2dPolyline {
+ public:
+  static OdDb2dPolyline createObject();
+  void appendVertex(OdDb2dVertexPtr&);
+  void setLayer(OdDbObjectId&, bool);
+};
+
+class OdDbPoint{
+ public:
+  static OdDbPoint * createObject();
+  void setPosition(OdGePoint3d);
+  void   setLayer(OdDbObjectId&, bool);
+};
+
+
 
 #endif

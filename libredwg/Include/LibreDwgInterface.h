@@ -176,6 +176,10 @@ class CoordVal
 {
  public:
   CoordVal & operator = (CoordVal &);
+  template <class T> CoordVal operator = (T *);
+  template <class T> CoordVal operator = (T &);
+  template <class T> CoordVal operator = (T );
+
 };
 
 class OdGePoint3d {
@@ -349,6 +353,10 @@ class OdDb2dVertex {
 
 class OdDb2dVertexPtr{
  public:
+  template <class T> OdDb2dVertexPtr operator = (T *);
+  //template <class T> OdDb2dVertexPtr = (T &);
+  template <class T> OdDb2dVertexPtr operator = (T );
+
   OdDb2dVertex * operator -> ();
 };
 
@@ -412,6 +420,7 @@ class OdDbLayerTablePtr{
 class OdDb2dPolyline;
 class OdDb2dPolylinePtr{
  public:
+  //OdDb2dPolylinePtr(OdDb2dPolyline&);
   OdDb2dPolylinePtr(OdDb2dPolyline*);
   OdDb2dPolyline * operator -> ();
 };
@@ -424,6 +433,9 @@ class OdDbObject
 class OdDbObjectPtr {
  public:
   OdDbObject * operator -> ();
+  template <class T> OdDbObjectPtr operator = (T *);
+  //  template <class T> OdDbObjectPtroperator = (T &);
+  template <class T> OdDbObjectPtr operator = (T );
   OdDbObjectPtr operator = (OdDbObject *);
   OdDbObjectPtr operator = (OdDbPoint *);
   OdDbObjectPtr operator = (OdDbObjectPtr);
@@ -464,7 +476,7 @@ class OdDbLayerTableRecord
 
 class OdDb2dPolyline {
  public:
-  static OdDb2dPolyline createObject();
+  static OdDb2dPolylinePtr createObject();
   void appendVertex(OdDb2dVertexPtr&);
   void setLayer(OdDbObjectId&, bool);
 };

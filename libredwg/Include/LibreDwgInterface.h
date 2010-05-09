@@ -1,4 +1,5 @@
-
+#ifndef INC_LIBREDWGINTERFACE_H
+#define INC_LIBREDWGINTERFACE_H
 
 #define DD_T(X) OdString(X)
 
@@ -29,59 +30,8 @@ class OdCodePageId{};
 
 extern OdCodePageId CP_UNDEFINED; // global
 
-
-class  OdDbDatabase
-{
- public:
-  void setEXTMIN();
-  void setEXTMAX();
-  void setTILEMODE();
-  void getPaperSpaceId();
-};
-
-class  OdDbDatabasePtr
-{
- public:
-  OdDbDatabase * operator -> ();
-  //template <class T> operator = (T);
-};
 class OdDbObjectId{};
-class OdDbViewport{
- public:
-  static void createObject();
-  void release();
-  void setWidth();
-  void setHeight();
-  void setViewCenter();
-  void setViewTarget();
-  void setCenterPoint();
-  void setCircleSides();
-  void setGridIncrement();
-  void setLensLength();
-  void setSnapIncrement();
-  void setViewDirection();
-  void setViewHeight();
-  void zoomExtents();
- 
-};
 
-class OdDbViewportPtr{
- public:
-  OdDbViewport * operator -> ();
-};
-
-class OdDbBlockTableRecord{
- public:
-  void appendOdDbEntity(OdDbViewportPtr&);
-  void release();
-
-};
-
-class OdDbBlockTableRecordPtr{
- public:
-  OdDbBlockTableRecord * operator -> ();
-
-};
 
 class OdGsDevice{};
 class OdGsDevicePtr{
@@ -221,16 +171,10 @@ class OdDbHostAppServices2
 {};
 class OdDbSystemServices
 {};
-class OdDbHostAppServices
-{
- public :
-  //void readFile();
-  static OdDbDatabasePtr  readFile(const OdChar*&, bool&, bool&, Oda::FileShareMode&, const OdPassword&);
-  
 
-};
 
-template <class T> class OdStaticRxObject {};
+
+
 
 class OdGePoint3d {
  public:
@@ -238,26 +182,24 @@ class OdGePoint3d {
 };
 class OdGeVector3d {
  public:
+  OdGeVector3d( int, int, int);
 };
 
-class OdGePoint2d {
+class OdGePoint2d 
+{
  public:
+  OdGePoint2d (double, double );
+
 };
-class odInitialize{
- public:
-};
+
 class OdDbDate {
  public:
-  void setDate();
-  void setTime();
+
+  void setDate(int, int, int);
+  void setTime(int, int, int, int);
+
 };
 class date{
- public:
-};
-class odDbSetTDUCREATE{
- public:
-};
-class odDbSetTDUUPDATE{
  public:
 };
 
@@ -271,3 +213,97 @@ class OdUInt16{
  public:
   OdUInt16(int);
 };
+
+
+class OdDbViewport{
+ public:
+  static OdDbViewport* createObject();
+
+    void release();
+    void setCenterPoint(OdGePoint3d);
+    void setCircleSides(OdUInt16);
+    void setGridIncrement(OdGeVector2d);
+    void setHeight(double);
+    void setHeight(int);
+    void setLensLength(double);
+    void setSnapIncrement(OdGeVector2d);
+    void setViewCenter(OdGePoint2d);
+    void setViewDirection(OdGeVector3d);
+    void setViewHeight(double);
+    void setViewTarget(OdGePoint3d);
+    void setWidth(double);
+    void setWidth(int);
+    void zoomExtents();
+};
+
+class OdDbViewportPtr{
+ public:
+  OdDbViewportPtr(OdDbViewport*);
+  OdDbViewportPtr();
+  OdDbViewport * operator -> ();
+};
+
+class OdDbBlockTableRecord{
+ public:
+  void appendOdDbEntity(OdDbViewportPtr&);
+  //  void appendOdDbEntity(OdDbViewportPtr&);
+
+  void release();
+
+};
+
+class OdDbBlockTableRecordPtr{
+ public:
+  OdDbBlockTableRecord * operator -> ();
+
+};
+//paper and modelspace
+class Space
+{
+ public:
+  OdDbBlockTableRecordPtr safeOpenObject(OdDb::ACCESS);
+};
+
+class  OdDbDatabase
+{
+ public:
+  void setEXTMAX(OdGePoint3d);
+  void setEXTMIN(OdGePoint3d);
+  void setTILEMODE(int);
+  
+  Space getPaperSpaceId();
+  void writeFile(OdWrFileBuf*, OdDb::_filetype&, OdDb::autocadversion&, bool);
+
+  Space getModelSpaceId();
+};
+
+class  OdDbDatabasePtr
+{
+ public:
+  OdDbDatabase * operator -> ();
+  OdDbDatabase & operator * ();
+  //template <class T> operator = (T);
+};
+
+
+class OdDbHostAppServices
+{
+ public :
+  //void readFile();
+  static OdDbDatabasePtr  readFile(const OdChar*&, bool&, bool&, Oda::FileShareMode&, const OdPassword&);
+ 
+};
+
+template <class T> class OdStaticRxObject 
+{
+ public: 
+  OdDbDatabasePtr createDatabase ();
+};
+
+
+// global functions 
+template <class T> void odInitialize(T *);
+void odDbSetTDUCREATE(OdDbDatabase&, OdDbDate&);
+void odDbSetTDUUPDATE(OdDbDatabase&, OdDbDate&);
+
+#endif

@@ -36,12 +36,16 @@ void OdDbBlockTableRecord::release(){
 }
 
 
-template <> CoordVal CoordVal::operator=<double>(double){
-  cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __FUNCTION__ << endl;
+template <> CoordVal CoordVal::operator=<double>(double val){
+  cerr << "CoordVal" <<val << endl;
+  cerr << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __FUNCTION__ << endl;
+  return *this;
 }
 
 template <> OdDb2dVertexPtr OdDb2dVertexPtr::operator=<OdDb2dVertex>(OdDb2dVertex*){
   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __FUNCTION__ << endl;
+  return *this;
+
 }
 
 template <> void OdDbBlockTableRecord::appendOdDbEntity<OdDb2dPolylinePtr>(OdDb2dPolylinePtr&){
@@ -54,10 +58,12 @@ template <> void OdDbBlockTableRecord::appendOdDbEntity<OdDbPointPtr>(OdDbPointP
 
 template <>  OdDbObjectPtr OdDbObjectPtr::operator=<OdDb2dPolylinePtr>(OdDb2dPolylinePtr){
   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __FUNCTION__ << endl;
+  return *this;
 }
 
 template <>  OdDbObjectPtr OdDbObjectPtr::operator=<OdDbPointPtr>(OdDbPointPtr){
   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __FUNCTION__ << endl;
+  return *this;
 }
 
 
@@ -208,9 +214,14 @@ void OdDbViewport::setViewCenter(OdGePoint2d){
   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __FUNCTION__ << endl;
 }
 
-OdDbLayerTableRecordPtr OdDbLayerTableRecordPtr::operator=(OdDbLayerTableRecord*){
+OdDbLayerTableRecordPtr OdDbLayerTableRecordPtr::operator=(OdDbLayerTableRecordPtr)
+{
   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __FUNCTION__ << endl;
+  return *this;
 }
+//OdDbLayerTableRecordPtr OdDbLayerTableRecordPtr::operator=(OdDbLayerTableRecord*){
+//  cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __FUNCTION__ << endl;
+//}
 
 OdDbViewportPtr::OdDbViewportPtr(){
   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __FUNCTION__ << endl;
@@ -309,6 +320,7 @@ Space OdDbDatabase::getLayerTableId(){
 
 OdDbLayerTablePtr& OdDbLayerTablePtr::operator=(OdDbLayerTableRecordPtr){
   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __FUNCTION__ << endl;
+  return *this;
 }
 
 OdDbBlockTableRecord* OdDbBlockTableRecordPtr::operator->(){
@@ -328,10 +340,25 @@ void OdResBuf::setString(char const*){
 }
 
 
-template <> CoordVal OdDbBlockTableRecordPtr::operator=<OdDbLayerTableRecordPtr>(OdDbLayerTableRecordPtr)
+template <>
+CoordVal OdDbBlockTableRecordPtr::operator=<OdDbLayerTableRecordPtr>(OdDbLayerTableRecordPtr)
+{
+  //TODO 
+  CoordVal ret;
+  cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __FUNCTION__ << endl;
+  return ret;
+}
+
+void OdStaticRxBase::vinit()
 {
 
 }
+
+// template <> CoordVal OdDbBlockTableRecordPtr::operator=<OdDbLayerTableRecordPtr>(OdDbLayerTableRecordPtr)
+// {
+//   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __FUNCTION__ << endl;
+//   return *this;
+// }
 ///media/sdc1/homemdupont/experiments/gdal/gdal/.libs/libgdal.so: undefined reference to `OdStaticRxObject<OGRServices>::createDatabase()'
 ///media/sdc1/homemdupont/experiments/gdal/gdal/.libs/libgdal.so: undefined reference to `void odInitialize<OdStaticRxObject<OGRServices> >(OdStaticRxObject<OGRServices>*)'
 

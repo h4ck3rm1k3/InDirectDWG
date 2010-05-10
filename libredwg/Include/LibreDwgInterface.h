@@ -177,7 +177,7 @@ class CoordVal
  public:
   CoordVal & operator = (CoordVal &);
   template <class T> CoordVal operator = (T *);
-  template <class T> CoordVal operator = (T &);
+  //  template <class T> CoordVal operator = (T &);
   template <class T> CoordVal operator = (T );
 
 };
@@ -279,8 +279,9 @@ class OdDbLayerTableRecord;
 class OdDbLayerTableRecordPtr{
  public:
   OdDbLayerTableRecord * operator -> ();
-  OdDbLayerTableRecordPtr operator = (OdDbLayerTableRecordPtr &);
-  OdDbLayerTableRecordPtr operator = (OdDbLayerTableRecord *);
+  OdDbLayerTableRecordPtr operator = (OdDbLayerTableRecordPtr);
+  //  OdDbLayerTableRecordPtr operator = (OdDbLayerTableRecordPtr &);
+  //    OdDbLayerTableRecordPtr operator = (OdDbLayerTableRecord *);
 };
 
 

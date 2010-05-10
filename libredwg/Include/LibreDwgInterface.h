@@ -271,6 +271,9 @@ class OdDbBlockTableRecord{
 class OdDbBlockTableRecordPtr{
  public:
   OdDbBlockTableRecord * operator -> ();
+  template <class T> CoordVal operator = (T *);
+  template <class T> CoordVal operator = (T &);
+  template <class T> CoordVal operator = (T );
 
 };
 
@@ -327,10 +330,18 @@ class OdDbHostAppServices
  
 };
 
-template <class T> class OdStaticRxObject 
+class OdStaticRxBase
+{
+ public:
+  virtual void vinit();
+  static OdDbDatabasePtr vcreateDatabase ();
+};
+
+template <class T> class OdStaticRxObject  : public OdStaticRxBase
 {
  public: 
   OdDbDatabasePtr createDatabase ();
+  void init();
 };
 
 

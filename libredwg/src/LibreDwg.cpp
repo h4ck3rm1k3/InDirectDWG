@@ -26,8 +26,6 @@ template <> void OdDbBlockTableRecord::appendOdDbEntity<OdDb2dPolylinePtr>(OdDb2
 template <> void OdDbBlockTableRecord::appendOdDbEntity<OdDbPointPtr>(OdDbPointPtr&){}
 template <>  OdDbObjectPtr OdDbObjectPtr::operator=<OdDb2dPolylinePtr>(OdDb2dPolylinePtr){}
 template <>  OdDbObjectPtr OdDbObjectPtr::operator=<OdDbPointPtr>(OdDbPointPtr){}
-// depends on ogr template <> void OdStaticRxObject<OGRServices>::createDatabase(){} 
-//template <> void odInitialize<OdStaticRxObject<OGRServices> >(OdStaticRxObject<OGRServices>*){}
 
 OdUInt16::OdUInt16(int){}
 void OdDbPoint::setLayer(OdDbObjectId&, bool){}
@@ -104,3 +102,16 @@ OdDbBlockTableRecord* OdDbBlockTableRecordPtr::operator->(){}
 void OdDbObject::setXData(OdResBufPtr&){}
 void OdDbViewport::setHeight(int){}
 void OdResBuf::setString(char const*){}
+
+template <> CoordVal OdDbBlockTableRecordPtr::operator=<OdDbLayerTableRecordPtr>(OdDbLayerTableRecordPtr)
+{
+
+}
+///media/sdc1/homemdupont/experiments/gdal/gdal/.libs/libgdal.so: undefined reference to `OdStaticRxObject<OGRServices>::createDatabase()'
+///media/sdc1/homemdupont/experiments/gdal/gdal/.libs/libgdal.so: undefined reference to `void odInitialize<OdStaticRxObject<OGRServices> >(OdStaticRxObject<OGRServices>*)'
+
+OdDbDatabasePtr OdStaticRxBase::vcreateDatabase()
+{
+  OdDbDatabasePtr db;
+  return db;
+}

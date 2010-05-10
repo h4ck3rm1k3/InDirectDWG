@@ -189,7 +189,7 @@ class OdGePoint3d {
   CoordVal  z;
   OdGePoint3d( );
   OdGePoint3d( int, int, int);
-  
+  void print ();
 };
 
 class OdGeVector3d {
@@ -217,13 +217,15 @@ class date{
  public:
 };
 
-class OdGeVector2d{
-
+class OdGeVector2d
+{
  public:
   OdGeVector2d(  double, double);
-
+  void print ();
 };
-class OdUInt16{
+
+class OdUInt16
+{
  public:
   OdUInt16(int);
 };
@@ -354,8 +356,10 @@ class OdCmColor{
 };
 
 class OdDb2dVertex;
-class OdDb2dVertexPtr{
+class OdDb2dVertexPtr
+{
  public:
+  void print ();
   template <class T> OdDb2dVertexPtr operator = (T *);
   //template <class T> OdDb2dVertexPtr = (T &);
   template <class T> OdDb2dVertexPtr operator = (T );

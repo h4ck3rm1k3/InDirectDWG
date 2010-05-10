@@ -18,7 +18,7 @@ void OdDbViewport::setViewHeight(double h) // called 4 times
   cerr  << "view height " << h << endl;
 }
 
-void OdDbViewport::setLensLength(double){
+void OdDbViewport::setLensLength(double){//2
   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __PRETTY_FUNCTION__ << endl;
 }
 
@@ -33,14 +33,14 @@ const char*  Oda::OdError::description(){
   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __PRETTY_FUNCTION__ << endl;
   return "todo";
 }
-void OdDbBlockTableRecord::release(){
+void OdDbBlockTableRecord::release(){//2
   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __PRETTY_FUNCTION__ << endl;
 }
 
 
-template <> CoordVal CoordVal::operator=<double>(double val){
+template <> CoordVal CoordVal::operator=<double>(double val){//N
   cerr << "CoordVal" <<val << endl;
-  cerr << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __PRETTY_FUNCTION__ << endl;
+  cerr << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __PRETTY_FUNCTION__ << endl;//
   return *this;
 }
 
@@ -50,7 +50,8 @@ template <> OdDb2dVertexPtr OdDb2dVertexPtr::operator=<OdDb2dVertex>(OdDb2dVerte
 
 }
 
-template <> void OdDbBlockTableRecord::appendOdDbEntity<OdDb2dPolylinePtr>(OdDb2dPolylinePtr&){
+template <> void OdDbBlockTableRecord::appendOdDbEntity<OdDb2dPolylinePtr>(OdDb2dPolylinePtr&)//N
+{
   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __PRETTY_FUNCTION__ << endl;
 }
 
@@ -58,7 +59,7 @@ template <> void OdDbBlockTableRecord::appendOdDbEntity<OdDbPointPtr>(OdDbPointP
   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __PRETTY_FUNCTION__ << endl;
 }
 
-template <>  OdDbObjectPtr OdDbObjectPtr::operator=<OdDb2dPolylinePtr>(OdDb2dPolylinePtr){
+template <>  OdDbObjectPtr OdDbObjectPtr::operator=<OdDb2dPolylinePtr>(OdDb2dPolylinePtr){//N
   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __PRETTY_FUNCTION__ << endl;
   return *this;
 }
@@ -69,7 +70,7 @@ template <>  OdDbObjectPtr OdDbObjectPtr::operator=<OdDbPointPtr>(OdDbPointPtr){
 }
 
 
-OdUInt16::OdUInt16(int){
+OdUInt16::OdUInt16(int){//2
   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __PRETTY_FUNCTION__ << endl;
 }
 
@@ -77,7 +78,7 @@ void OdDbPoint::setLayer(OdDbObjectId&, bool){
   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __PRETTY_FUNCTION__ << endl;
 }
 
-void OdDbViewport::setGridIncrement(OdGeVector2d)
+void OdDbViewport::setGridIncrement(OdGeVector2d)//2
 {
 cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __PRETTY_FUNCTION__ << endl;
 }
@@ -87,17 +88,17 @@ OdDbViewportPtr::OdDbViewportPtr(OdDbViewport*)
 cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __PRETTY_FUNCTION__ << endl;
 }
 
-OdDb2dVertex* OdDb2dVertexPtr::operator->()
+OdDb2dVertex* OdDb2dVertexPtr::operator->()//N
 {
 cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __PRETTY_FUNCTION__ << endl;
 }
 
 
-void OdDbDate::setTime(int, int, int, int){
+void OdDbDate::setTime(int, int, int, int){//3
   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __PRETTY_FUNCTION__ << endl;
 }
 
-OdDbDatabase& OdDbDatabasePtr::operator*(){
+OdDbDatabase& OdDbDatabasePtr::operator*(){// called 2x
   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __PRETTY_FUNCTION__ << endl;
 }
 
@@ -135,24 +136,24 @@ void OdResBuf::setNext(OdResBufPtr& next)
   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __PRETTY_FUNCTION__ << endl;
 }
 
-void odDbSetTDUUPDATE(OdDbDatabase&, OdDbDate&){
+void odDbSetTDUUPDATE(OdDbDatabase&, OdDbDate&){// called once
   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __PRETTY_FUNCTION__ << endl;
 }
 
-OdDbDatabase* OdDbDatabasePtr::operator->(){
+OdDbDatabase* OdDbDatabasePtr::operator->(){//called ca 10 times
   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __PRETTY_FUNCTION__ << endl;
 }
 
-void OdDbViewport::setViewDirection(OdGeVector3d){
+void OdDbViewport::setViewDirection(OdGeVector3d){// called 4
   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __PRETTY_FUNCTION__ << endl;
 }
 
-void OdDb2dPolyline::setLayer(OdDbObjectId&, bool){
+void OdDb2dPolyline::setLayer(OdDbObjectId&, bool){//called N
   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __PRETTY_FUNCTION__ << endl;
 }
 
 // used 1
-Space OdDbDatabase::getModelSpaceId(){
+Space OdDbDatabase::getModelSpaceId(){//1
   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __PRETTY_FUNCTION__ << endl;
 }
 
@@ -234,20 +235,20 @@ OdResBufPtr OdResBuf::next(){ // N
   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ": OdResBuf::" <<  __PRETTY_FUNCTION__ << endl;
 }
 
-void OdDbViewport::setCenterPoint(OdGePoint3d){
+void OdDbViewport::setCenterPoint(OdGePoint3d){//4
   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __PRETTY_FUNCTION__ << endl;
 }
 
 
-OdGeVector3d::OdGeVector3d(int, int, int){
+OdGeVector3d::OdGeVector3d(int, int, int){//4
   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __PRETTY_FUNCTION__ << endl;
 }
 
-void OdDbViewport::setViewCenter(OdGePoint2d){
+void OdDbViewport::setViewCenter(OdGePoint2d){//4
   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __PRETTY_FUNCTION__ << endl;
 }
 
-OdDbLayerTableRecordPtr OdDbLayerTableRecordPtr::operator=(OdDbLayerTableRecordPtr)
+OdDbLayerTableRecordPtr OdDbLayerTableRecordPtr::operator=(OdDbLayerTableRecordPtr)//1
 {
   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __PRETTY_FUNCTION__ << endl;
   return *this;
@@ -256,7 +257,7 @@ OdDbLayerTableRecordPtr OdDbLayerTableRecordPtr::operator=(OdDbLayerTableRecordP
 //  cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __PRETTY_FUNCTION__ << endl;
 //}
 
-OdDbViewportPtr::OdDbViewportPtr(){
+OdDbViewportPtr::OdDbViewportPtr(){//4
   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __PRETTY_FUNCTION__ << endl;
 }
 
@@ -265,7 +266,7 @@ OdDbPoint* OdDbPointPtr::operator->(){
 }
 
 
-void OdDbViewport::release(){
+void OdDbViewport::release(){//2
   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __PRETTY_FUNCTION__ << endl;
 }
 
@@ -275,15 +276,15 @@ OdResBuf*  OdResBuf::newRb(int x)
   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __PRETTY_FUNCTION__ << endl;
 }
 
-void OdDbDatabase::setEXTMIN(OdGePoint3d){
+void OdDbDatabase::setEXTMIN(OdGePoint3d){//2
   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __PRETTY_FUNCTION__ << endl;
 }
 
-OdGePoint2d::OdGePoint2d(double, double){
+OdGePoint2d::OdGePoint2d(double, double){//4
   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __PRETTY_FUNCTION__ << endl;
 }
 
-void OdDbViewport::setCircleSides(OdUInt16){
+void OdDbViewport::setCircleSides(OdUInt16){//2
   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __PRETTY_FUNCTION__ << endl;
 }
 
@@ -294,14 +295,15 @@ OdResBufPtr::OdResBufPtr(OdResBuf* other)
   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __PRETTY_FUNCTION__ << endl;
 }
 
-void OdCmColor::setRGB(int, int, int){
+void OdCmColor::setRGB(int, int, int)
+{ //0
   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __PRETTY_FUNCTION__ << endl;
 }
 
- OdDbLayerTableRecord* OdDbLayerTableRecordPtr::operator->(){
+OdDbLayerTableRecord* OdDbLayerTableRecordPtr::operator->()
+{ //1
   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ": OdDbLayerTableRecordPtr::" <<  __PRETTY_FUNCTION__ << endl;
 }
-
 
 OdDbPointPtr::OdDbPointPtr(OdDbPoint* p)
 {
@@ -319,20 +321,20 @@ void OdDbViewport::setViewTarget(OdGePoint3d)
 }
 
 
-OdDbLayerTable* OdDbLayerTablePtr::operator->()
+OdDbLayerTable* OdDbLayerTablePtr::operator->()//1
 {
   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" << __PRETTY_FUNCTION__<< endl;
 }
 
-bool OdDbObjectPtr::operator!=(void const*){
+bool OdDbObjectPtr::operator!=(void const*){//N calls
   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __PRETTY_FUNCTION__ << endl;
 }
 
- OdDbViewport* OdDbViewportPtr::operator->(){
+OdDbViewport* OdDbViewportPtr::operator->(){//N
   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __PRETTY_FUNCTION__ << endl;
 }
 
-OdResBuf* OdResBufPtr::operator->(){
+OdResBuf* OdResBufPtr::operator->(){//N
   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __PRETTY_FUNCTION__ << endl;
 }
 
@@ -373,17 +375,17 @@ void OdDbObject::setXData(OdResBufPtr&){
   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __PRETTY_FUNCTION__ << endl;
 }
 
-void OdDbViewport::setHeight(int){
+void OdDbViewport::setHeight(int){//2
   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __PRETTY_FUNCTION__ << endl;
 }
 
-void OdResBuf::setString(char const*){
+void OdResBuf::setString(char const*){//N
   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __PRETTY_FUNCTION__ << endl;
 }
 
 
 template <>
-CoordVal OdDbBlockTableRecordPtr::operator=<OdDbLayerTableRecordPtr>(OdDbLayerTableRecordPtr)
+CoordVal OdDbBlockTableRecordPtr::operator=<OdDbLayerTableRecordPtr>(OdDbLayerTableRecordPtr)//2
 {
   //TODO 
   CoordVal ret;
@@ -404,7 +406,7 @@ void OdStaticRxBase::vinit()
 ///media/sdc1/homemdupont/experiments/gdal/gdal/.libs/libgdal.so: undefined reference to `OdStaticRxObject<OGRServices>::createDatabase()'
 ///media/sdc1/homemdupont/experiments/gdal/gdal/.libs/libgdal.so: undefined reference to `void odInitialize<OdStaticRxObject<OGRServices> >(OdStaticRxObject<OGRServices>*)'
 
-OdDbDatabasePtr OdStaticRxBase::vcreateDatabase()
+OdDbDatabasePtr OdStaticRxBase::vcreateDatabase()//2
 {
   OdDbDatabasePtr db;
   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __PRETTY_FUNCTION__ << endl;
@@ -412,21 +414,21 @@ OdDbDatabasePtr OdStaticRxBase::vcreateDatabase()
 }
 
 
-OdDbLayerTableRecordPtr OdDbLayerTableRecord::createObject()
+OdDbLayerTableRecordPtr OdDbLayerTableRecord::createObject()//1
 {
   OdDbLayerTableRecordPtr ret;
   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __PRETTY_FUNCTION__ << endl;
   return ret;
 }
 
-OdDbViewportPtr OdDbViewport::createObject(){
+OdDbViewportPtr OdDbViewport::createObject(){//2
   OdDbViewportPtr ret;
   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __PRETTY_FUNCTION__ << endl;
   return ret;
 }
 
 
-OdDb2dPolylinePtr OdDb2dPolyline::createObject()
+OdDb2dPolylinePtr OdDb2dPolyline::createObject()//N
 {
   OdDb2dPolylinePtr ret;
   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __PRETTY_FUNCTION__ << endl;
@@ -441,14 +443,14 @@ OdDbPointPtr  OdDbPoint::createObject()
   return ret;
 }
 
-OdDb2dVertexPtr OdDb2dVertex::createObject()
+OdDb2dVertexPtr OdDb2dVertex::createObject()// N calls
 {
   OdDb2dVertexPtr ret;
   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __PRETTY_FUNCTION__ << endl;
   return ret;
 }
 
-OdDb2dPolylinePtr::OdDb2dPolylinePtr()
+OdDb2dPolylinePtr::OdDb2dPolylinePtr()//N
 {
   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __PRETTY_FUNCTION__ << endl;
 }
@@ -458,12 +460,12 @@ OdDbPointPtr::OdDbPointPtr()
   cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __PRETTY_FUNCTION__ << endl;
 }
 
-void OdDb2dVertexPtr::print()
+void OdDb2dVertexPtr::print()//N
 {
     cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __PRETTY_FUNCTION__ << endl;
 }
 
-void OdGePoint3d::print()
+void OdGePoint3d::print()//N
 {
     cerr  << "TRACE" << __FILE__<< ":" << __LINE__ << ":" <<  __PRETTY_FUNCTION__ << endl;
 }

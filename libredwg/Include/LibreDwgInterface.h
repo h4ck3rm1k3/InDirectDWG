@@ -229,27 +229,7 @@ class OdUInt16{
 };
 
 
-class OdDbViewport{
- public:
-  static OdDbViewport* createObject();
-
-    void release();
-    void setCenterPoint(OdGePoint3d);
-    void setCircleSides(OdUInt16);
-    void setGridIncrement(OdGeVector2d);
-    void setHeight(double);
-    void setHeight(int);
-    void setLensLength(double);
-    void setSnapIncrement(OdGeVector2d);
-    void setViewCenter(OdGePoint2d);
-    void setViewDirection(OdGeVector3d);
-    void setViewHeight(double);
-    void setViewTarget(OdGePoint3d);
-    void setWidth(double);
-    void setWidth(int);
-    void zoomExtents();
-};
-
+class OdDbViewport;
 class OdDbViewportPtr{
  public:
   OdDbViewportPtr(OdDbViewport*);
@@ -257,15 +237,32 @@ class OdDbViewportPtr{
   OdDbViewport * operator -> ();
 };
 
+
+class OdDbViewport{
+ public:
+  static OdDbViewportPtr createObject();
+  void release();
+  void setCenterPoint(OdGePoint3d);
+  void setCircleSides(OdUInt16);
+  void setGridIncrement(OdGeVector2d);
+  void setHeight(double);
+  void setHeight(int);
+  void setLensLength(double);
+  void setSnapIncrement(OdGeVector2d);
+  void setViewCenter(OdGePoint2d);
+  void setViewDirection(OdGeVector3d);
+  void setViewHeight(double);
+  void setViewTarget(OdGePoint3d);
+  void setWidth(double);
+  void setWidth(int);
+  void zoomExtents();
+};
+
 class OdDbBlockTableRecord{
  public:
-
   template <class T>void appendOdDbEntity(T&);
-  
-  //  void appendOdDbEntity(OdDbViewportPtr&);
   void setName();
   void release();
-
 };
 
 class OdDbBlockTableRecordPtr{
@@ -355,13 +352,7 @@ class OdCmColor{
   void setRGB(int,int,int);
 };
 
-class OdDb2dVertex {
- public:
-  static OdDb2dVertex * createObject();
-  void setPosition(OdGePoint3d&);
-
-};
-
+class OdDb2dVertex;
 class OdDb2dVertexPtr{
  public:
   template <class T> OdDb2dVertexPtr operator = (T *);
@@ -370,6 +361,14 @@ class OdDb2dVertexPtr{
 
   OdDb2dVertex * operator -> ();
 };
+
+class OdDb2dVertex {
+ public:
+  static OdDb2dVertexPtr createObject();
+  void setPosition(OdGePoint3d&);
+
+};
+
 
 
 
@@ -410,6 +409,7 @@ class OdResBuf
 class OdDbPoint;
 class OdDbPointPtr{
  public:
+  OdDbPointPtr();
   OdDbPointPtr(OdDbPoint *);
   OdDbPoint * operator -> ();
 };
@@ -431,7 +431,7 @@ class OdDbLayerTablePtr{
 class OdDb2dPolyline;
 class OdDb2dPolylinePtr{
  public:
-  //OdDb2dPolylinePtr(OdDb2dPolyline&);
+  OdDb2dPolylinePtr();
   OdDb2dPolylinePtr(OdDb2dPolyline*);
   OdDb2dPolyline * operator -> ();
 };
@@ -478,7 +478,7 @@ class OdDbLayerTable
 class OdDbLayerTableRecord
 {
  public:
-  static OdDbLayerTableRecord * createObject();
+  static OdDbLayerTableRecordPtr createObject();
   void setColor(OdCmColor&);
   void setName(const char*);
   OdDbObjectId add(OdDbLayerTableRecordPtr&);
@@ -494,7 +494,7 @@ class OdDb2dPolyline {
 
 class OdDbPoint{
  public:
-  static OdDbPoint * createObject();
+  static OdDbPointPtr createObject();
   void setPosition(OdGePoint3d);
   void   setLayer(OdDbObjectId&, bool);
 };

@@ -409,11 +409,11 @@ class OdDbLayerTable;
 class OdDbLayerTablePtr{
  public:
   OdDbLayerTable * operator -> ();
-  OdDbLayerTablePtr & operator = (OdDbBlockTableRecordPtr &);
-  OdDbLayerTablePtr & operator = (OdDbLayerTableRecordPtr);
-  OdDbLayerTablePtr & operator = (OdDbLayerTablePtr &);
-  OdDbLayerTablePtr & operator = (OdDbLayerTable* );
-  OdDbLayerTablePtr & operator = (OdDbLayerTablePtr );
+  //OdDbLayerTablePtr & operator = (OdDbBlockTableRecordPtr &);
+    OdDbLayerTablePtr & operator = (OdDbLayerTableRecordPtr);
+  //  OdDbLayerTablePtr & operator = (OdDbLayerTablePtr &);
+  //  OdDbLayerTablePtr & operator = (OdDbLayerTable* );
+  //OdDbLayerTablePtr & operator = (OdDbLayerTablePtr );
 
 };
 

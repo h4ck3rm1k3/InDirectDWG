@@ -1,0 +1,6 @@
+
+// implementation
+void foo()
+{
+
+}
